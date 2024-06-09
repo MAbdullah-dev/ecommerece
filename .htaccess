@@ -1,0 +1,9 @@
+# Enable the rewriting engine
+RewriteEngine On
+
+# Redirect the root URL to the 'public' directory
+RewriteRule ^$ public/ [L]
+
+# Redirect all other requests to the 'public' directory, maintaining the original request URI
+RewriteRule (.*) public/$1 [L]
+

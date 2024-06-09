@@ -1,0 +1,18 @@
+# Disable MultiViews to prevent conflicts with mod_rewrite
+Options -Multiviews
+
+# Enable the rewriting engine
+RewriteEngine On
+
+# Set the base URL for the rewrite rules
+RewriteBase /e-commerece/public
+
+# Check if the requested resource is not a directory
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Check if the requested resource is not a file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Redirect all other requests to Index.php with the original URL as a query parameter
+RewriteRule ^(.+)$ Index.php?url=$1 [QSA,L]
+
