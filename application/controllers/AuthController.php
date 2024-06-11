@@ -106,7 +106,7 @@ class AuthController extends framwork {
         $user = $this->AuthModel->findUserByEmail($email);
         if ($user && password_verify($password, $user->password)) {
             // Set session variables or any other login logic here
-            $this->setSession('user_id', $user->id);
+            $this->setSession('usgit initer_id', $user->id);
             $this->setSession('user_name', $user->name);
             $this->setSession('user_role', $user->role_id);
 
