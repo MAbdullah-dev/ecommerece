@@ -1,10 +1,6 @@
 <?php
-class HomeController extends framwork
+class FrontendController extends framwork
 {
-    public function home()
-    {
-        $this->view('frontend/home');
-    }
     public function about()
     {
         $this->view('frontend/About');
@@ -13,4 +9,4 @@ class HomeController extends framwork
     {
         $this->view('frontend/contact');
     }
-} 
+}
