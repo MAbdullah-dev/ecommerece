@@ -368,24 +368,18 @@
                         <div class="col-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="card-title">product table is here</h4>
+                                    <h4 class="card-title">TRASH DATA</h4>
                                     <div class="container mt-5">
-                                        <table class="table">
+                                        <table class="table table-bordered" id="softDeletedCategoryList">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">productName</th>
-                                                    <th scope="col">description</th>
-                                                    <th scope="col">img</th>
-                                                    <th scope="col">price</th>
-                                                    <th scope="col">Stock</th>
-                                                    <th scope="col">delete</th>
-                                                    <th scope="col">update</th>
-                                                    <!-- <th scope="col">Store_id</th> -->
+                                                    <th>ID</th>
+                                                    <th>Name</th>
+                                                    <th>Actions</th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="softProductList">
-
+                                            <tbody>
+                                                <!-- Soft-deleted categories will be dynamically loaded here -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -425,71 +419,227 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script>
             $(document).ready(function() {
-                // Add new category
+                // Handle form submission for adding a category
                 $('#categoryForm').on('submit', function(e) {
                     e.preventDefault();
                     let form = new FormData(this);
                     $.ajax({
-                        url: "<?php echo BASEURL ?>/CategoryController/addCategory", // Added a slash after BASEURL
+                        url: "<?php echo BASEURL ?>/CategoryController/addCategory",
                         method: 'post',
                         data: form,
-                        processData: false, // Set processData to false to prevent jQuery from automatically transforming the data into a query string
-                        contentType: false, // Set contentType to false to prevent jQuery from setting the Content-Type header
+                        processData: false,
+                        contentType: false,
                         success: function(res) {
-               //  alert(res);
-                  let response = $.parseJSON(res);
-                  console.log(response);
-                  if (response.status === 400 && response.errors) {
-                     let errorMessage = '<ul>';
-                     for (let key in response.errors) {
-                        errorMessage += '<li>' + response.errors[key] + '</li>';
-                     }
-                     errorMessage += '</ul>';
-                     document.getElementById('CerrorList').innerHTML = errorMessage;
-                     document.getElementById('CerrorAlert').classList.remove('d-none'); // Show the alert
-                  }
-                  else if (response.status === 401 && response.message) {
-                    let errorMessage = '<li>' + response.message + '</li>';
-                    $('#CerrorList').html(errorMessage);
-                    $('#CerrorAlert').removeClass('d-none'); // Show the alert
-                  } 
-                  else if (response.status === 200) {
-                     document.getElementById('CerrorAlert').classList.add('d-none'); // Hide the alert
-                     // document.querySelector('.alert').classList.remove('d-none');
-                     
-                  } else {
-                     document.getElementById('CerrorAlert').classList.add('d-none'); // Hide the alert
+                            let response = $.parseJSON(res);
 
-                     // Handle other error cases
-                  }
-
-               }
+                            if (response.status === 400 && response.message) {
+                                let errorMessage = '<ul>';
+                                errorMessage += '<li>' + response.message + '</li>';
+                                errorMessage += '</ul>';
+                                document.getElementById('CerrorList').innerHTML = errorMessage;
+                                document.getElementById('CerrorAlert').classList.remove('d-none'); // Show the alert
+                            } else if (response.status === 200) {
+                                document.getElementById('CerrorAlert').classList.add('d-none'); // Hide the alert
+                                alert(response.message || 'Category added successfully!');
+                                $('#categoryForm')[0].reset();
+                                loadCategories(); // Refresh categories list after adding a new category
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('An error occurred while processing your request. Please try again.');
+                        }
                     });
                 });
 
+                // Load categories on page load
+                function loadCategories() {
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/getCategories",
+                        method: 'get',
+                        success: function(res) {
+                            let categories = $.parseJSON(res);
+                            let output = '';
+                            if (Array.isArray(categories)) {
+                                categories.forEach(function(category) {
+                                    output += `
+                            <tr>
+                                <td>${category.id}</td>
+                                <td>${category.name}</td>
+                                <td>
+                                    <button class="btn btn-primary btn-sm update-btn" data-id="${category.id}" data-name="${category.name}">Update</button>
+                                    <button class="btn btn-danger btn-sm softdelete-btn" data-id="${category.id}">Soft Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                                });
+                            } else {
+                                output = '<tr><td colspan="3">No categories found</td></tr>';
+                            }
+                            $('#categoryList tbody').html(output);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+
+                // Load soft-deleted categories
+                function loadSoftDeletedCategories() {
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/getSoftDeletedCategories",
+                        method: 'get',
+                        success: function(res) {
+                            let categories = $.parseJSON(res);
+                            let output = '';
+                            if (Array.isArray(categories)) {
+                                categories.forEach(function(category) {
+                                    output += `
+                            <tr>
+                                <td>${category.id}</td>
+                                <td>${category.name}</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm restore-btn" data-id="${category.id}">Restore</button>
+                                    <button class="btn btn-danger btn-sm delete-btn" data-id="${category.id}">Permanent Delete</button>
+                                </td>
+                            </tr>
+                        `;
+                                });
+                            } else {
+                                output = '<tr><td colspan="3">No soft-deleted categories found</td></tr>';
+                            }
+                            $('#softDeletedCategoryList tbody').html(output);
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                }
+
+                // Soft delete category
+                $(document).on('click', '.softdelete-btn', function() {
+                    let id = $(this).data('id');
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/softDeleteCategory",
+                        method: 'post',
+                        data: {
+                            id: id
+                        },
+                        success: function(res) {
+                            alert('Category soft deleted successfully');
+                            loadCategories();
+                            loadSoftDeletedCategories();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('An error occurred while processing your request. Please try again.');
+                        }
+                    });
+                });
+
+                // Restore soft-deleted category
+                $(document).on('click', '.restore-btn', function() {
+                    let id = $(this).data('id');
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/restoreCategory",
+                        method: 'post',
+                        data: {
+                            id: id
+                        },
+                        success: function(res) {
+                            alert('Category restored successfully');
+                            loadCategories();
+                            loadSoftDeletedCategories();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('An error occurred while processing your request. Please try again.');
+                        }
+                    });
+                });
+
+                // Permanently delete category
+                $(document).on('click', '.delete-btn', function() {
+                    let id = $(this).data('id');
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/deleteCategory",
+                        method: 'post',
+                        data: {
+                            id: id
+                        },
+                        success: function(res) {
+                            alert('Category permanently deleted successfully');
+                            loadSoftDeletedCategories();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('An error occurred while processing your request. Please try again.');
+                        }
+                    });
+                });
+
+                // Update category - Show update modal with data
+                $(document).on('click', '.update-btn', function() {
+                    let id = $(this).data('id');
+                    let name = $(this).data('name');
+                    $('#categoryId').val(id);
+                    $('#updateCategoryName').val(name);
+                    $('#updateCategoryModal').modal('show');
+                });
+
+                // Update category - Submit form
+                $('#updateCategoryForm').on('submit', function(e) {
+                    e.preventDefault();
+                    let form = $(this).serialize();
+                    $.ajax({
+                        url: "<?php echo BASEURL ?>/CategoryController/updateCategory",
+                        method: 'post',
+                        data: form,
+                        success: function(res) {
+                            let response = $.parseJSON(res);
+                            if (response.status === 200) {
+                                alert('Category updated successfully');
+                                $('#updateCategoryModal').modal('hide');
+                                $('#updateCategoryError').addClass('d-none');
+                                loadCategories();
+                            } else {
+                                $('#updateCategoryError').removeClass('d-none').text(response.message);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('AJAX Error:', status, error);
+                            alert('An error occurred while processing your request. Please try again.');
+                        }
+                    });
+                });
+
+                // Call loadCategories and loadSoftDeletedCategories on page load
+                loadCategories();
+                loadSoftDeletedCategories();
             });
         </script>
 
         <!-- Modal -->
-        <div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal fade" id="updateCategoryModal" tabindex="-1" aria-labelledby="updateCategoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="updateModalLabel">Update Product</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="updateCategoryModalLabel">Update Category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span data-bs-dismiss="modal" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
-                        <div class="alert alert-warning alert-dismissible fade show d-none" id="uerrorAlert" role="alert">
-                            <strong>ERRORS!</strong>
-                            <ul id="uerrorList"></ul>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-
-                        <form id="updateProductForm">
+                        <form id="updateCategoryForm">
+                            <input type="hidden" id="categoryId" name="id">
+                            <div class="form-group">
+                                <label for="updateCategoryName">Category Name</label>
+                                <input type="text" class="form-control" id="updateCategoryName" name="name">
+                            </div>
+                            <div id="updateCategoryError" class="alert alert-danger d-none"></div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

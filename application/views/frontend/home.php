@@ -1,4 +1,4 @@
-<?php require_once 'partials/header.php' ?>
+ <?php include 'partials/header.php' ?>
                 <div class="slider-active dot-style">
                     <!-- Single -->
                     <div class="single-slider slider-bg1 hero-overly slider-height d-flex align-items-center">
@@ -401,4 +401,4 @@
 </div>
 <!--? Services Area End -->
 </main>
-<?php require_once 'partials/footer.php' ?>
+<?php include 'partials/footer.php' ?>
