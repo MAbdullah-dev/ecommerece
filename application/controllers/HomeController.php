@@ -7,10 +7,18 @@ class HomeController extends framwork
     }
     public function about()
     {
-        $this->view('frontend/About');
+        $this->view('frontend/about');
     }
     public function contact()
     {
         $this->view('frontend/contact');
+    }
+    public function blog()
+    {
+        $this->view('frontend/blog');
+    }
+    public function shop()
+    {
+        $this->view('frontend/shop');
     }
 } 

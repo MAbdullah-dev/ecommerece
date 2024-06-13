@@ -14,7 +14,6 @@ class Route {
     public function __construct() {
         // Get the URL and split it into parts
         $url = $this->url();
-        
         // If the URL is not empty
         if (!empty($url)) {
             // Check if a controller file corresponding to the first part of the URL exists

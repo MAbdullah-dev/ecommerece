@@ -7,24 +7,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo BASEURL ?>assets/img/favicon.ico">
 
     <!-- CSS here -->
    
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="assets/css/slicknav.css">
-    <link rel="stylesheet" href="assets/css/flaticon.css">
-    <link rel="stylesheet" href="assets/css/progressbar_barfiller.css">
-    <link rel="stylesheet" href="assets/css/gijgo.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/animated-headline.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/slick.css">
-    <link rel="stylesheet" href="assets/css/nice-select.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/slicknav.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/flaticon.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/progressbar_barfiller.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/gijgo.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/animate.min.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/animated-headline.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/themify-icons.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/slick.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/nice-select.css">
+    <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/style.css">
     
 </head>
 <body class="full-wrapper">
@@ -34,7 +34,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="./assets/img/logo/loder.png" alt="">
+                    <img src="./<?php echo BASEURL ?>assets/img/logo/loder.png" alt="">
                 </div>
             </div>
         </div>
@@ -49,16 +49,16 @@
                         <div class="header-left d-flex align-items-center">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.html"><img src="./assets/img/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="./<?php echo BASEURL ?>assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="<?php BASEURL ?>">Home</a></li> 
-                                        <li><a href="shop.html">shop</a></li>
-                                        <li><a href="<?php BASEURL ?>HomeController/about">About</a></li>
-                                        <li><a href="blog.html">Blog</a>
+                                        <li><a href="<?php echo BASEURL ?>">Home</a></li> 
+                                        <li><a href="<?php echo BASEURL ?>HomeController/shop">shop</a></li>
+                                        <li><a href="<?php echo BASEURL ?>HomeController/about">About</a></li>
+                                        <li><a href="<?php echo BASEURL ?>HomeController/blog">Blog</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="blog_details.html">Blog Details</a></li>
@@ -66,7 +66,7 @@
                                                 <li><a href="product_details.html">Product Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="<?php BASEURL ?>HomeController/contact">Contact</a></li>
+                                        <li><a href="<?php echo BASEURL ?>HomeController/contact">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>   
@@ -88,7 +88,7 @@
                                     </li>
                                     <li>
                                         <div class="card-stor">
-                                            <img src="./assets/img/gallery/card.svg" alt="">
+                                            <img src="./<?php echo BASEURL ?>assets/img/gallery/card.svg" alt="">
                                             <span>0</span>
                                         </div>
                                     </li>
@@ -128,7 +128,7 @@
                             </li>
                             <li>
                                 <div class="card-stor">
-                                    <img src="./assets/img/gallery/card.svg" alt="">
+                                    <img src="./<?php echo BASEURL ?>assets/img/gallery/card.svg" alt="">
                                     <span>0</span>
                                 </div>
                             </li>
@@ -136,3 +136,12 @@
                     </div>
                 </div>
                 <!-- /End mobile  Menu-->
+                <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
