@@ -484,231 +484,233 @@ $conn->close();
     <!-- endinject -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
+        // Form submission for uploading a product
         $('#uploadProductForm').on('submit', function(e) {
-          e.preventDefault();
-          let form = new FormData(this);
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/uploadProduct",
-            method: 'post',
-            data: form,
-            contentType: false,
-            processData: false,
-            success: function(res) {
-              let response = $.parseJSON(res);
-              if (response.status === 400 && response.errors) {
-                let errorMessage = '<ul>';
-                for (let key in response.errors) {
-                  errorMessage += '<li>' + response.errors[key] + '</li>';
+            e.preventDefault();
+            let form = new FormData(this);
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/uploadProduct",
+                method: 'post',
+                data: form,
+                contentType: false,
+                processData: false,
+                success: function(res) {
+                    let response = $.parseJSON(res);
+                    if (response.status === 400 && response.errors) {
+                        let errorMessage = '<ul>';
+                        for (let key in response.errors) {
+                            errorMessage += '<li>' + response.errors[key] + '</li>';
+                        }
+                        errorMessage += '</ul>';
+                        document.getElementById('errorList').innerHTML = errorMessage;
+                        document.getElementById('errorAlert').classList.remove('d-none'); // Show the alert
+                    } else if (response.status === 200) {
+                        document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert
+                        alert('Product uploaded successfully!');
+                        $('#uploadProductForm')[0].reset();
+                        showData();
+                        
+                    } else {
+                        document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
                 }
-                errorMessage += '</ul>';
-                document.getElementById('errorList').innerHTML = errorMessage;
-                document.getElementById('errorAlert').classList.remove('d-none'); // Show the alert
-              } else if (response.status === 200) {
-                document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert
-                alert('Product uploaded successfully!');
-                $('#uploadProductForm')[0].reset();
-                showData(); // Refresh the data
-              } else {
-                document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert
-              }
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            });
         });
 
         // Function to fetch and display all products
         function showData() {
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/showData",
-            method: 'get',
-            success: function(res) {
-              let products = $.parseJSON(res);
-              let output = '';
-              if (Array.isArray(products)) {
-                products.forEach(function(product) {
-                  output += `
-                            <tr>
-                                <th scope="row">${product.id}</th>
-                                <td>${product.name}</td>
-                                <td>${product.description}</td>
-                                <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
-                                <td>${product.price}</td>
-                                <td>${product.stock}</td>
-                                <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="${product.id}">Update</button></td>
-                                <td><button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button></td>
-                            </tr>
-                        `;
-                });
-              } else {
-                output = '<tr><td colspan="8">No products found</td></tr>';
-              }
-              document.getElementById('productList').innerHTML = output;
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/showData",
+                method: 'get',
+                success: function(res) {
+                    let products = $.parseJSON(res);
+                    let output = '';
+                    if (Array.isArray(products)) {
+                        products.forEach(function(product) {
+                            output += `
+                                <tr>
+                                    <th scope="row">${product.id}</th>
+                                    <td>${product.name}</td>
+                                    <td>${product.description}</td>
+                                    <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
+                                    <td>${product.price}</td>
+                                    <td>${product.stock}</td>
+                                    <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="${product.id}">Update</button></td>
+                                    <td><button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button></td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        output = '<tr><td colspan="8">No products found</td></tr>';
+                    }
+                    document.getElementById('productList').innerHTML = output;
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         }
 
         // Function to fetch and display soft-deleted products
         function showSoftData() {
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/getSoftDeletedProducts",
-            method: 'get',
-            success: function(res) {
-              let softProducts = $.parseJSON(res);
-              let output = '';
-              if (Array.isArray(softProducts)) {
-                softProducts.forEach(function(product) {
-                  output += `
-                            <tr>
-                                <th scope="row">${product.id}</th>
-                                <td>${product.name}</td>
-                                <td>${product.description}</td>
-                                <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
-                                <td>${product.price}</td>
-                                <td>${product.stock}</td>
-                                <td><button class="btn btn-primary btn-sm" id="restore-btn" data-id="${product.id}">Restore</button></td>
-                                <td><button class="btn btn-danger btn-sm" id="permanentdelete-btn" data-id="${product.id}">Permanent Delete</button></td>
-                            </tr>
-                        `;
-                });
-              } else {
-                output = '<tr><td colspan="8">No products found</td></tr>';
-              }
-              document.getElementById('softProductList').innerHTML = output;
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/getSoftDeletedProducts",
+                method: 'get',
+                success: function(res) {
+                    let softProducts = $.parseJSON(res);
+                    let output = '';
+                    if (Array.isArray(softProducts)) {
+                        softProducts.forEach(function(product) {
+                            output += `
+                                <tr>
+                                    <th scope="row">${product.id}</th>
+                                    <td>${product.name}</td>
+                                    <td>${product.description}</td>
+                                    <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
+                                    <td>${product.price}</td>
+                                    <td>${product.stock}</td>
+                                    <td><button class="btn btn-primary btn-sm" id="restore-btn" data-id="${product.id}">Restore</button></td>
+                                    <td><button class="btn btn-danger btn-sm" id="permanentdelete-btn" data-id="${product.id}">Permanent Delete</button></td>
+                                </tr>
+                            `;
+                        });
+                    } else {
+                        output = '<tr><td colspan="8">No products found</td></tr>';
+                    }
+                    document.getElementById('softProductList').innerHTML = output;
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         }
 
         // Event delegation for soft delete operation
         $('#productList').on("click", "#softdelete-btn", function() {
-          let id = $(this).attr('data-id');
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/softdeleteProduct",
-            method: 'post',
-            data: {
-              id: id
-            },
-            success: function(res) {
-              showData(); // Refresh the data after successful deletion
-              showSoftData(); // Refresh the soft-deleted data after successful deletion
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/softdeleteProduct",
+                method: 'post',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    alert('Product soft-deleted successfully!');
+                    location.reload(); // Refresh the page
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
 
         // Event delegation for permanent delete operation
         $('#softProductList').on("click", "#permanentdelete-btn", function() {
-          let id = $(this).attr('data-id');
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/permanentDeleteProduct",
-            method: 'post',
-            data: {
-              id: id
-            },
-            success: function(res) {
-              showSoftData(); // Refresh the data after successful deletion
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/permanentDeleteProduct",
+                method: 'post',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    alert('Product permanently deleted successfully!');
+                    location.reload(); // Refresh the page
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
 
         // Event delegation for restore operation
         $('#softProductList').on("click", "#restore-btn", function() {
-          let id = $(this).attr('data-id');
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/restoreProduct",
-            method: 'post',
-            data: {
-              id: id
-            },
-            success: function(res) {
-              showSoftData(); // Refresh the data after successful restoration
-              showData(); // Refresh the active data after successful restoration
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/restoreProduct",
+                method: 'post',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    alert('Product restored successfully!');
+                    location.reload(); // Refresh the page
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
         });
+
         // Event delegation for update operation
         $('#productList').on("click", "#update-btn", function() {
-          let id = $(this).attr('data-id');
-          // console.log(id);
-          $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/getProductupdate",
-            method: 'get',
-            data: {
-              id: id
-            },
-            success: function(res) {
-              let product = $.parseJSON(res);
-              console.log(product);
-              $('#updateProductForm #product_id').val(product.id);
-              $('#updateProductForm #name').val(product.name);
-              $('#updateProductForm #description').val(product.description);
-              $('#updateProductForm #price').val(product.price);
-              $('#updateProductForm #stock').val(product.stock);
-              $('#updateProductForm #categories').val(product.categories); // Assuming categories is an array
-              $('#updateModal').modal('show');
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
-        });
-        $('#updateProductForm').on('submit', function(e) {
-    e.preventDefault();
-    let form = $(this).serialize(); // Serialize the form data
-    $.ajax({
-        url: "<?php echo BASEURL ?>/ProductController/updateProduct",
-        method: 'post',
-        data: form, // Send serialized form data
-        success: function(res) {
-            let response = $.parseJSON(res);
-            if (response.status === 400 && response.errors) {
-                let errorMessage = '<ul>';
-                for (let key in response.errors) {
-                    errorMessage += '<li>' + response.errors[key] + '</li>';
+            let id = $(this).attr('data-id');
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/getProductupdate",
+                method: 'get',
+                data: {
+                    id: id
+                },
+                success: function(res) {
+                    let product = $.parseJSON(res);
+                    $('#updateProductForm #product_id').val(product.id);
+                    $('#updateProductForm #name').val(product.name);
+                    $('#updateProductForm #description').val(product.description);
+                    $('#updateProductForm #price').val(product.price);
+                    $('#updateProductForm #stock').val(product.stock);
+                    $('#updateProductForm #categories').val(product.categories); // Assuming categories is an array
+                    $('#updateModal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
                 }
-                errorMessage += '</ul>';
-                document.getElementById('uerrorList').innerHTML = errorMessage;
-                document.getElementById('uerrorAlert').classList.remove('d-none'); // Show the alert
-            } else if (response.status === 200) {
-                document.getElementById('uerrorAlert').classList.add('d-none'); // Hide the alert
-                alert('Product updated successfully!');
-                $('#updateProductForm')[0].reset();
-                $('#updateModal').modal('hide');
-                showData(); // Refresh the data
-            } else {
-                document.getElementById('uerrorAlert').classList.add('d-none'); // Hide the alert
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log(xhr.responseText);
-        }
-    });
-});
+            });
+        });
 
-        // Existing code ...
-
+        // Form submission for updating a product
+        $('#updateProductForm').on('submit', function(e) {
+            e.preventDefault();
+            let form = $(this).serialize(); // Serialize the form data
+            $.ajax({
+                url: "<?php echo BASEURL ?>/ProductController/updateProduct",
+                method: 'post',
+                data: form, // Send serialized form data
+                success: function(res) {
+                    let response = $.parseJSON(res);
+                    if (response.status === 400 && response.errors) {
+                        let errorMessage = '<ul>';
+                        for (let key in response.errors) {
+                            errorMessage += '<li>' + response.errors[key] + '</li>';
+                        }
+                        errorMessage += '</ul>';
+                        document.getElementById('uerrorList').innerHTML = errorMessage;
+                        document.getElementById('uerrorAlert').classList.remove('d-none'); // Show the alert
+                    } else if (response.status === 200) {
+                        document.getElementById('uerrorAlert').classList.add('d-none'); // Hide the alert
+                        alert('Product updated successfully!');
+                        $('#updateProductForm')[0].reset();
+                        $('#updateModal').modal('hide');
+                        location.reload(); // Refresh the page
+                    } else {
+                        document.getElementById('uerrorAlert').classList.add('d-none'); // Hide the alert
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
 
         // Initial data fetch
         showData();
         showSoftData();
-      });
-    </script>
+    });
+</script>
+
 
     <!-- Modal -->
     <div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">

@@ -34,23 +34,30 @@
                         <div class="gallery-img">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <img src="assets/img/gallery/gallery1.png" class="mb-30" alt="">
+                                    <img src="<?php echo BASEURL ?>assets/img/gallery/gallery1.png" class="mb-30" alt="">
                                 </div>
                                 <div class="col-lg-6">
-                                    <img src="assets/img/gallery/gallery2.png" class="mb-30" alt="">
+                                <form id="addToCartForm">
+                <input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" id="quantity" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+            </form>
                                 </div>
                                 <div class="col-lg-6">
-                                    <img src="assets/img/gallery/gallery3.png"  class="mb-30"alt="">
+                                    <img src="<?php echo BASEURL ?>assets/img/gallery/gallery3.png"  class="mb-30"alt="">
                                 </div>
                                 <div class="col-lg-6">
-                                    <img src="assets/img/gallery/gallery4.png"  class="mb-30"alt="">
+                                    <img src="<?php echo BASEURL ?>assets/img/gallery/gallery4.png"  class="mb-30"alt="">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="map">
-                            <img src="assets/img/gallery/map.png" alt="">
+                            <img src="<?php echo BASEURL ?>assets/img/gallery/map.png" alt="">
                         </div>
                         <div class="form-wrapper pt-80">
                             <div class="row ">
@@ -96,7 +103,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="single-product mb-50">
                             <div class="location-img">
-                                <img src="assets/img/gallery/popular-imtes1.png" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/gallery/popular-imtes1.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p><a href="product_details.html">Established fact that by the<br> readable content</a></p>
@@ -107,7 +114,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="single-product mb-50">
                             <div class="location-img">
-                                <img src="assets/img/gallery/popular-imtes2.png" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/gallery/popular-imtes2.png" alt="">
                             </div>
                             <div class="location-details">
                                 <p><a href="product_details.html">Established fact that by the<br> readable content</a></p>
@@ -127,7 +134,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="single-cat mb-50">
                             <div class="cat-icon">
-                                <img src="assets/img/icon/services1.svg" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/icon/services1.svg" alt="">
                             </div>
                             <div class="cat-cap">
                                 <h5>Fast & Free Delivery</h5>
@@ -138,7 +145,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="single-cat mb-50">
                             <div class="cat-icon">
-                                <img src="assets/img/icon/services2.svg" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/icon/services2.svg" alt="">
                             </div>
                             <div class="cat-cap">
                                 <h5>Fast & Free Delivery</h5>
@@ -149,7 +156,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="single-cat mb-30">
                             <div class="cat-icon">
-                                <img src="assets/img/icon/services3.svg" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/icon/services3.svg" alt="">
                             </div>
                             <div class="cat-cap">
                                 <h5>Fast & Free Delivery</h5>
@@ -160,7 +167,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="single-cat">
                             <div class="cat-icon">
-                                <img src="assets/img/icon/services4.svg" alt="">
+                                <img src="<?php echo BASEURL ?>assets/img/icon/services4.svg" alt="">
                             </div>
                             <div class="cat-cap">
                                 <h5>Fast & Free Delivery</h5>
@@ -184,7 +191,7 @@
                        <div class="single-footer-caption mb-30">
                           <!-- logo -->
                           <div class="footer-logo mb-35">
-                           <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                           <a href="index.html"><img src="<?php echo BASEURL ?>assets/img/logo/logo2_footer.png" alt=""></a>
                        </div>
                        <div class="footer-tittle">
                            <div class="footer-pera">

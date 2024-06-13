@@ -1,3 +1,7 @@
+ <?php 
+ session_start();
+ print_r($_SESSION)
+  ?>
  <?php include 'partials/header.php' ?>
                 <div class="slider-active dot-style">
                     <!-- Single -->

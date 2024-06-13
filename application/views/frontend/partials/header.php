@@ -73,6 +73,7 @@
                         </div>
                         <div class="header-right1 d-flex align-items-center">
                             <!-- Social -->
+                            <a href="<?php BASEURL ?>DashboardController/Dashboardpage" style="color: black;">DASHBOARD</a>
                             <div class="header-social d-none d-md-block">
                                 <a href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>

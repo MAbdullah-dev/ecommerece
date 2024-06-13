@@ -41,8 +41,8 @@ class ProductController extends framwork
         echo json_encode(['status' => 400, 'errors' => $errors]);
         exit;
     }
-
-        $store_id = $this->ProductModel->getStoreIdByUserId(2); // Assuming you have user sessions
+    session_start();
+        $store_id = $this->ProductModel->getStoreIdByUserId( $_SESSION['usgit initer_id']); // Assuming you have user sessions
         $product_id = $this->ProductModel->insertProduct($productname, $description,$image, $price, $stock,
         
         $store_id);

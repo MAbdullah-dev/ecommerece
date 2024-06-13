@@ -24,7 +24,7 @@ body{
 }
 .container{
   display: block; /* Ensure the container is always displayed */
-  background: #fff;
+  /* background: #fff; */
   padding: 25px; /* Slightly increased the padding */
   box-shadow: 0 0 8px rgba(0,0,0,0.1);
   border-radius: 25px;

@@ -69,8 +69,8 @@ class framwork
     }
 
     public function redirect($path) {
-        header("Location:  . BASEPATH . "/" . $path");
-        exit();
+        header("Location: " . BASEURL  . $path);
+    exit();
     }
 }
 ?>

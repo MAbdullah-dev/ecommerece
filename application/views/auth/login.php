@@ -71,6 +71,7 @@
                   else if (response.status === 200) {
                      document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert
                      // document.querySelector('.alert').classList.remove('d-none');
+                     window.location.href = '<?php echo BASEURL ?>';
                      
                   } else {
                      document.getElementById('errorAlert').classList.add('d-none'); // Hide the alert

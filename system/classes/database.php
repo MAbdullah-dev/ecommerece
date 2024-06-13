@@ -54,6 +54,10 @@ class Database
         return $this->result->fetch(PDO::FETCH_OBJ);
     }
     // public function fetchAcco
+    public function lastInsertId()
+    {
+        return $this->conn->lastInsertId();
+    }
 }
 
 // Define BASEURL constant
