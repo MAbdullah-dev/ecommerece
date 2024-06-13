@@ -8,7 +8,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="shop.html" class="btn">Shop Now</a>
+                                        <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="shop.html" class="btn">Shop Now</a>
+                                        <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                     <!-- Hero Caption -->
                                     <div class="hero__caption">
                                         <h1>fashion<br>changing<br>always</h1>
-                                        <a href="shop.html" class="btn">Shop Now</a>
+                                        <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +58,7 @@
                                     <span>Glasses</span>
                                 </div>
                                 <div class="favorit-items">
-                                 <a href="shop.html" class="btn">Shop Now</a>
+                                 <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                              </div>
                          </div>
                      </div>
@@ -71,7 +71,7 @@
                                 <span>Watches</span>
                             </div>
                             <div class="favorit-items">
-                             <a href="shop.html" class="btn">Shop Now</a>
+                             <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                          </div>
                      </div>
                  </div>
@@ -84,7 +84,7 @@
                             <span>Jackets</span>
                         </div>
                         <div class="favorit-items">
-                         <a href="shop.html" class="btn">Shop Now</a>
+                         <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                      </div>
                  </div>
              </div>
@@ -97,7 +97,7 @@
                         <span>Clothes</span>
                     </div>
                     <div class="favorit-items">
-                     <a href="shop.html" class="btn">Shop Now</a>
+                     <a href="<?php echo BASEURL ?>HomeController/shop" class="btn">Shop Now</a>
                  </div>
              </div>
          </div>

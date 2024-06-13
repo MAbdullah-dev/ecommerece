@@ -5,7 +5,7 @@ class ProductController extends framwork
 
     public function __construct()
     {
-        $this->ProductModel=$this->model('ProductModel');;
+        $this->ProductModel=$this->model('ProductModel');
     }
     public function uploadProduct()
     {

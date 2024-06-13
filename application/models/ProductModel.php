@@ -23,6 +23,15 @@ class ProductModel extends Database
             ':category_id' => $category_id
         ]);
     }
+    public function getProductById($id) {
+        $sql="SELECT * FROM products WHERE id = :id AND deleted_at IS NULL";
+        $this->Query($sql,
+        [
+            ':id' => $id
+        ]);
+        $this->fetch();
+
+    }
     public function getStoreIdByUserId($user_id)
     {
         $sql = "SELECT id FROM stores WHERE user_id = :user_id";

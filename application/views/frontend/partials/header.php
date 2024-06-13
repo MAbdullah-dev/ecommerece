@@ -49,7 +49,7 @@
                         <div class="header-left d-flex align-items-center">
                             <!-- Logo -->
                             <div class="logo">
-                                <a href="index.html"><img src="./<?php echo BASEURL ?>assets/img/logo/logo.png" alt=""></a>
+                                <a href="<?php echo BASEURL ?>"><img src="<?php echo BASEURL ?>assets/img/logo/logo.png" alt=""></a>
                             </div>
                             <!-- Main-menu -->
                             <div class="main-menu  d-none d-lg-block">

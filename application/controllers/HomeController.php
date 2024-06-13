@@ -1,6 +1,12 @@
 <?php
 class HomeController extends framwork
 {
+    public $ProductModel;
+
+    public function __construct()
+    {
+        $this->ProductModel=$this->model('ProductModel');
+    }
     public function home()
     {
         $this->view('frontend/home');
@@ -19,6 +25,12 @@ class HomeController extends framwork
     }
     public function shop()
     {
-        $this->view('frontend/shop');
+        $data = $this->ProductModel->showData();
+        $this->view('frontend/shop',['data'=>$data]);
+    }
+    public function product_detail($id)
+    {  
+        $product = $this->ProductModel->getProductById($id);
+        $this->view('frontend/product_detail',['product' => $product]);
     }
 } 
