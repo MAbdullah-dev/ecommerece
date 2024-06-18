@@ -1,0 +1,70 @@
+.card-stor {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.card-stor img {
+    width: 40px;
+    height: 40px;
+}
+
+.card-stor span {
+    margin-left: 8px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.dropdown-menu {
+    width: 300px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item .item-info {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.dropdown-item .item-info .item-name {
+    font-weight: bold;
+    color: #333;
+}
+
+.dropdown-item .item-info .item-price {
+    color: #999;
+}
+
+.dropdown-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-footer .total-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.dropdown-footer .checkout-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+}

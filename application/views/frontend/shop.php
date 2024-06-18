@@ -1,6 +1,6 @@
 <?php require_once "partials/header.php" ?>
 
-<?php  print_r($data) ?>
+
 <main>
     <!-- breadcrumb Start-->
     <div class="page-notification">
@@ -106,14 +106,14 @@
                             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                                 <div class="single-new-arrival mb-50 text-center">
                                     <div class="popular-img">
-                                        <img src="<?php echo BASEURL ?>assets/img/gallery/popular3.png" alt="">
+                                        <img src="  https://lh3.googleusercontent.com/gg/ANIJZFGtTrKDVUqvmMApqlN__lD-FykV9YHDX2mi_5edvUbJ8Gm4-yyO7jMc6CNBQc2Is62rf_wiYU1xbFfvoFnLfVFgEJsYBVLfFNPi8twrBEHZtBA-1_o2q6hpvlWGW3pMQWyTk9yqMQIkPXU7tOsmCKSyhSQufcZEiGNP0RkYhw1fcHEU8kKfqGQkjQsjnAxeWNzLpoOJN4iwe8m8Dbur7F2Q7GCr8D02Pg_PD7kFpEhvT-n8Nt_bh3oZKUkvdcndn8Z_rpWUyZi0BavH-w13sDAQXIxRRYPE5KaCH2Ukp90kuYs5b1HnvlrQxQNnp9o3RHjT7W7VEoMO9RF-TJ2axv3N" alt="">
                                         <div class="favorit-items">
                                             <!-- <span class="flaticon-heart"></span> -->
                                             <img src="<?php echo BASEURL ?>assets/img/gallery/favorit-card.png" alt="">
                                         </div>
                                     </div>
                                     <div class="popular-caption">
-                                        <h3><a href="<?php echo BASEURL ?>HomeController/product_detail/<?php echo $product->id?> "><?php echo $product->name ?> </a></h3>
+                                        <h3><a href="<?php echo BASEURL ?>HomeController/product_detail/<?php echo $product->id ?> "><?php echo $product->name ?> </a></h3>
                                         <div class="rating mb-10">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>

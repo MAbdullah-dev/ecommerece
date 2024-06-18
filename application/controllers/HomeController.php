@@ -4,6 +4,7 @@
 class HomeController extends framwork
 {
     public $ProductModel;
+    public $CartModel;
 
     public function __construct()
     {
@@ -11,7 +12,9 @@ class HomeController extends framwork
         // if ($_SESSION == "") {
         //     $this->redirect('AuthController/loginpage');
         // }
+        $this->helper('link');
         $this->ProductModel = $this->model('ProductModel');
+        $this->CartModel = $this->model('CartModel');
     }
     public function home()
     {
@@ -40,4 +43,12 @@ class HomeController extends framwork
 
         $this->view('frontend/product_detail', ['data' => $product]);
     }
+    public function checkout()
+    {
+        session_start();
+        $user_id = $_SESSION['usgit initer_id']; // Assume user is logged in
+        $cartItems = $this->CartModel->getCartItemsByUserId($user_id);
+        $this->view('frontend/checkout',['data'=>$cartItems ]);
+    }
+    
 }

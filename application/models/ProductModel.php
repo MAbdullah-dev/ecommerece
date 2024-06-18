@@ -28,7 +28,7 @@ class ProductModel extends Database
         $this->Query($sql, [
             ':id' => $id
         ]);
-        return $this->fetchAssoc();
+        return $this->fetchAll();
     }
     public function getStoreIdByUserId($user_id)
     {

@@ -112,7 +112,7 @@
                     <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a>
+                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>

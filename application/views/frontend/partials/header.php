@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/slick.css">
     <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/nice-select.css">
     <link rel="stylesheet" href="<?php echo BASEURL ?>assets/css/style.css">
+    <?php linkCSS('css/cart.css') ?>
     
 </head>
 <body class="full-wrapper">
@@ -73,7 +74,7 @@
                         </div>
                         <div class="header-right1 d-flex align-items-center">
                             <!-- Social -->
-                            <a href="<?php BASEURL ?>DashboardController/Dashboardpage" style="color: black;">DASHBOARD</a>
+                            <a href="<?php echo BASEURL ?>DashboardController/Dashboardpage" style="color: black;">DASHBOARD</a>
                             <div class="header-social d-none d-md-block">
                                 <a href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
@@ -87,12 +88,39 @@
                                             <i class="ti-search"></i>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="card-stor">
-                                            <img src="./<?php echo BASEURL ?>assets/img/gallery/card.svg" alt="">
-                                            <span>0</span>
-                                        </div>
-                                    </li>
+                                    <li class="list-inline-item dropdown">
+            <div class="card-stor" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="<?php echo BASEURL ?>assets/img/gallery/card.svg" alt="Cart Icon">
+                <span>0</span>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                    <img src="https://via.placeholder.com/40" alt="Item 1">
+                    <div class="item-info">
+                        <div class="item-name">Item 1</div>
+                        <div class="item-price">$10.00</div>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="#">
+                    <img src="https://via.placeholder.com/40" alt="Item 2">
+                    <div class="item-info">
+                        <div class="item-name">Item 2</div>
+                        <div class="item-price">$20.00</div>
+                    </div>
+                </a>
+                <a class="dropdown-item" href="#">
+                    <img src="https://via.placeholder.com/40" alt="Item 3">
+                    <div class="item-info">
+                        <div class="item-name">Item 3</div>
+                        <div class="item-price">$30.00</div>
+                    </div>
+                </a>
+                <div class="dropdown-footer">
+                    <div class="total-price">Total: $60.00</div>
+                    <a class="checkout-btn" href="#">Checkout</a>
+                </div>
+            </div>
+        </li>
                                 </ul>
                             </div>
                         </div>
