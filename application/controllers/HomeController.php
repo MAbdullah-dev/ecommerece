@@ -9,12 +9,14 @@ class HomeController extends framwork
     public function __construct()
     {
         
-        // if ($_SESSION == "") {
-        //     $this->redirect('AuthController/loginpage');
-        // }
+        
         $this->helper('link');
         $this->ProductModel = $this->model('ProductModel');
         $this->CartModel = $this->model('CartModel');
+        // session_start();
+        // if (!isset($_SESSION['usgit initer_id'])) {
+        //     $this->redirect('AuthController/loginpage');
+        // }
     }
     public function home()
     {
@@ -49,6 +51,10 @@ class HomeController extends framwork
         $user_id = $_SESSION['usgit initer_id']; // Assume user is logged in
         $cartItems = $this->CartModel->getCartItemsByUserId($user_id);
         $this->view('frontend/checkout',['data'=>$cartItems ]);
+    }
+    public function forbidden()
+    {
+        $this->view('frontend/Unauthorizedaccess');
     }
     
 }

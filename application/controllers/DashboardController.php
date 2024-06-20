@@ -1,31 +1,34 @@
-<?php 
+<?php
+// DashboardController.php
+
 class DashboardController extends framwork
 {
-    public $ProductModel;
-    
-    // public function __construct()
-    // {
-    //     $this->ProductModel=$this->model('ProductModel');;
-        
-    // }
+    public function __construct()
+    {
+        parent::__construct(); // Ensure framework constructor is called
+    }
+
     public function dashboardpage()
     {
+        // Use checkAccess middleware to allow access for roles 1 and 2
+        $this->checkAccess([1, 2]);
+
         $this->view('dashboard/dashboard');
     }
+
     public function productcrudPage()
     {
-        
-        // print_r($categories);
-        // die;
+        // Use checkAccess middleware to allow access for role 1 only
+        $this->checkAccess([1, 2]);
+
         $this->view('dashboard/pages/crudoperations/productcrud');
     }
+
     public function categoriescrudPage()
     {
-        
-        // print_r($categories);
-        // die;
+        // Use checkAccess middleware to allow access for role 1 only
+        $this->checkAccess([1]);
+
         $this->view('dashboard/pages/crudoperations/categoriescrud');
     }
-    
-
 }

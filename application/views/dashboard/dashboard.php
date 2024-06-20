@@ -108,12 +108,31 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item">
-                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
-                  </li>
+           
+                <?php if (isset($_SESSION['user_role'])): ?>
+                  
+    <?php if ($_SESSION['user_role'] == 1): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
+        </li>
+    <?php elseif ($_SESSION['user_role'] == 2): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+        </li>
+    <?php else: ?>
+        <li class="nav-item">
+            <span class="nav-link">Unauthorized user</span>
+        </li>
+    <?php endif; ?>
+<?php else: ?>
+    <li class="nav-item">
+        <span class="nav-link">Unauthorized user</span>
+    </li>
+<?php endif; ?>
+
                   <li class="nav-item">
                     <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
                   </li>

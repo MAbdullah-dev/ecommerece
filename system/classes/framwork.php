@@ -2,6 +2,13 @@
 
 class framwork
 {
+    public function __construct()
+    {
+        session_start();
+        if (!isset($_SESSION['usgit initer_id'])) {
+            $this->redirect('AuthController/loginpage');
+        }
+    }
     public function view($view, $data = []) {
         if (file_exists("../application/views/" . $view . ".php")) {
             require_once "../application/views/$view.php";
@@ -72,5 +79,14 @@ class framwork
         header("Location: " . BASEURL  . $path);
     exit();
     }
+    
+public function checkAccess($allowedRoles = []) {
+    // Check if user role is allowed
+    $userRole = $_SESSION['user_role'];
+    if (!in_array($userRole, $allowedRoles)) {
+        die($this->redirect('/homeController/forbidden')); // Stop further execution if role not allowed
+    }
+}
+
 }
 ?>
