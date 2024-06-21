@@ -56,5 +56,9 @@ class HomeController extends framwork
     {
         $this->view('frontend/Unauthorizedaccess');
     }
+    public function pagenotfound()
+    {
+        $this->view('frontend/pagenotfound');
+    }
     
 }

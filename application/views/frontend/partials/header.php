@@ -60,21 +60,22 @@
                                         <li><a href="<?php echo BASEURL ?>HomeController/shop">shop</a></li>
                                         <li><a href="<?php echo BASEURL ?>HomeController/about">About</a></li>
                                         <li><a href="<?php echo BASEURL ?>HomeController/blog">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                                <li><a href="product_details.html">Product Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="<?php echo BASEURL ?>HomeController/contact">Contact</a></li>
+                                        <ul class="submenu">
+                                            <li><a href="blog.html">Blog</a></li>
+                                            <li><a href="blog_details.html">Blog Details</a></li>
+                                            <li><a href="elements.html">Elements</a></li>
+                                            <li><a href="product_details.html">Product Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="<?php echo BASEURL ?>HomeController/contact">Contact</a></li>
+                                    <li><a href="<?php echo BASEURL ?>DashboardController/Dashboardpage"><img src="https://img.icons8.com/?size=100&id=XnHBz2LnhELw&format=png&color=000000" style="max-width: 30px;"alt="dashboard icon"></a></li>
                                     </ul>
                                 </nav>
                             </div>   
                         </div>
                         <div class="header-right1 d-flex align-items-center">
                             <!-- Social -->
-                            <a href="<?php echo BASEURL ?>DashboardController/Dashboardpage" style="color: black;">DASHBOARD</a>
+                           
                             <div class="header-social d-none d-md-block">
                                 <a href="#"><i class="fab fa-twitter"></i></a>
                                 <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>

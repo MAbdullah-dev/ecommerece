@@ -24,7 +24,9 @@ class Route {
                 unset($url[0]);
             } else {
                 // Display a 404 error if the controller file does not exist
-                echo "404 sorry $url[0] not found ";
+                 "404 sorry $url[0] not found ";
+                 header("Location: " . BASEURL  . 'HomeController/pagenotfound');
+
             }
         }
         
@@ -41,7 +43,8 @@ class Route {
                 unset($url[1]);
         
             }else{
-                echo "404 sorry $url[1] not found ";
+                "404 sorry $url[1] not found ";
+                header("Location: " . BASEURL  . 'HomeController/pagenotfound');
             }
         }
         if (isset($url)) {
