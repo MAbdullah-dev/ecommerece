@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../dashboardAssets/assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../dashboardAssets/assets/vendors/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End Plugin css for this page -->
@@ -415,9 +416,13 @@
         <script src="../dashboardAssets/assets/js/settings.js"></script>
         <script src="../dashboardAssets/assets/js/jquery.cookie.js"></script>
         <script src="../dashboardAssets/assets/js/todolist.js"></script>
-        <!-- endinject -->
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+        <!-- endinject -->
+
         <script>
+
             $(document).ready(function() {
                 // Handle form submission for adding a category
                 $('#categoryForm').on('submit', function(e) {
@@ -477,6 +482,7 @@
                                 output = '<tr><td colspan="3">No categories found</td></tr>';
                             }
                             $('#categoryList tbody').html(output);
+                            $('#categoryList').DataTable();
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);
@@ -509,6 +515,7 @@
                                 output = '<tr><td colspan="3">No soft-deleted categories found</td></tr>';
                             }
                             $('#softDeletedCategoryList tbody').html(output);
+                            $('#softDeletedCategoryList').DataTable();
                         },
                         error: function(xhr, status, error) {
                             console.log(xhr.responseText);

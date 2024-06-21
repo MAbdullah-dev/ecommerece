@@ -13,10 +13,10 @@ class HomeController extends framwork
         $this->helper('link');
         $this->ProductModel = $this->model('ProductModel');
         $this->CartModel = $this->model('CartModel');
-        // session_start();
-        // if (!isset($_SESSION['usgit initer_id'])) {
-        //     $this->redirect('AuthController/loginpage');
-        // }
+        session_start();
+        if (!isset($_SESSION['usgit initer_id'])) {
+            $this->redirect('AuthController/loginpage');
+        }
     }
     public function home()
     {
