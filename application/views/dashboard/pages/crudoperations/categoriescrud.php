@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../dashboardAssets/assets/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="../dashboardAssets/assets/vendors/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
@@ -194,40 +195,60 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.html">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo BASEURL ?>/DashboardController/dashboardpage">
                             <span class="menu-title">Dashboard</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                            <span class="menu-title">CRUD OPERATION</span>
+                            <span class="menu-title">CRUD OPERATIONS</span>
                             <i class="menu-arrow"></i>
-                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                            <i style="font-size: 18px;color: gray;" class="ri-table-line"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
+
+                                <?php if (isset($_SESSION['user_role'])) : ?>
+
+                                    <?php if ($_SESSION['user_role'] == 1) : ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
+                                        </li>
+                                    <?php elseif ($_SESSION['user_role'] == 2) : ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+                                        </li>
+                                    <?php else : ?>
+                                        <li class="nav-item">
+                                            <span class="nav-link">Unauthorized user</span>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php else : ?>
+                                    <li class="nav-item">
+                                        <span class="nav-link">Unauthorized user</span>
+                                    </li>
+                                <?php endif; ?>
+
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">PRODUCT CRUD</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">categories Crud</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a>
+                                    <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                            <span class="menu-title">Icons</span>
-                            <i class="mdi mdi-contacts menu-icon"></i>
+                            <span class="menu-title">Orders</span>
+                            <i style="font-size: 18px; color: gray; margin-left: 7.8rem;" class="ri-shopping-bag-2-fill"></i>
                         </a>
                         <div class="collapse" id="icons">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../../pages/icons/font-awesome.html">Font Awesome</a>
+                                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/orderpage">ORDER TABLE</a>
                                 </li>
                             </ul>
                         </div>
@@ -422,7 +443,6 @@
         <!-- endinject -->
 
         <script>
-
             $(document).ready(function() {
                 // Handle form submission for adding a category
                 $('#categoryForm').on('submit', function(e) {

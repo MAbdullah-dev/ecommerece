@@ -57,8 +57,18 @@ class ProductController extends framwork
     }
     
     }
-    public function showData() {
-        $data = $this->ProductModel->showData();
+    public function showData()
+    {
+        session_start();
+        $user_role = $_SESSION['user_role'];
+        $user_id = $_SESSION['usgit initer_id'];
+
+        if ($user_role == 1) {
+            $data = $this->ProductModel->getAllProducts();
+        } else if ($user_role == 2) {
+            $data = $this->ProductModel->getProductsByStoreOwner($user_id);
+        }
+
         echo json_encode($data);
     }
     public function softdeleteProduct()

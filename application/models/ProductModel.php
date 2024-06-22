@@ -23,25 +23,38 @@ class ProductModel extends Database
             ':category_id' => $category_id
         ]);
     }
-    public function getProductById($id) {
-        $sql = "SELECT * FROM products WHERE id = :id AND deleted_at IS NULL";
-        $this->Query($sql, [
-            ':id' => $id
-        ]);
+    public function getAllProducts()
+    {
+        $sql = "SELECT * FROM products WHERE deleted_at IS NULL";
+        $this->Query($sql);
         return $this->fetchAll();
     }
+
+    public function getProductsByStoreOwner($user_id)
+    {
+        $sql = "SELECT * FROM products WHERE store_id = (SELECT id FROM stores WHERE user_id = :user_id) AND deleted_at IS NULL";
+        $this->Query($sql, [':user_id' => $user_id]);
+        return $this->fetchAll();
+    }
+    // public function getProductById($id) {
+    //     $sql = "SELECT * FROM products WHERE id = :id AND deleted_at IS NULL";
+    //     $this->Query($sql, [
+    //         ':id' => $id
+    //     ]);
+    //     return $this->fetchAll();
+    // }
     public function getStoreIdByUserId($user_id)
     {
         $sql = "SELECT id FROM stores WHERE user_id = :user_id";
         $this->Query($sql, [':user_id' => $user_id]);
         return $this->fetch()->id;
     }
-    public function showData()
-    {
-        $sql = "SELECT * FROM products WHERE deleted_at IS NULL";
-        $this->Query($sql);
-        return $this->fetchAll();
-    }
+    // public function showData()
+    // {
+    //     $sql = "SELECT * FROM products WHERE deleted_at IS NULL";
+    //     $this->Query($sql);
+    //     return $this->fetchAll();
+    // }
     public function softdeleteProductCategories($product_id)
     {
         $sql = "UPDATE product_category SET deleted_at = NOW() WHERE product_id = :product_id";

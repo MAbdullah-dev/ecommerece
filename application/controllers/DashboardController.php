@@ -34,4 +34,11 @@ class DashboardController extends framwork
 
         $this->view('dashboard/pages/crudoperations/categoriescrud');
     }
+    public function orderPage()
+    {
+        // Use checkAccess middleware to allow access for role 1 only
+        $this->checkAccess([1,2]);
+
+        $this->view('dashboard/pages/orders/ordertable');
+    }
 }

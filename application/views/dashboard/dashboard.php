@@ -15,6 +15,7 @@
   <!-- Plugin css for this page -->
   <link rel="stylesheet" href="../dashboardAssets/assets/vendors/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="../dashboardAssets/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
@@ -24,10 +25,10 @@
   <!-- End layout styles -->
   <link rel="shortcut icon" href="../dashboardAssets/assets/images/favicon.png" />
   <style>
-        .hidden {
-            display: none;
-        }
-    </style>
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -112,7 +113,7 @@
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <span class="menu-title">CRUD OPERATIONS</span>
               <i class="menu-arrow"></i>
-              <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              <i style="font-size: 18px;color: gray;" class="ri-table-line"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
@@ -149,13 +150,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <span class="menu-title">Icons</span>
-              <i class="mdi mdi-contacts menu-icon"></i>
+              <span class="menu-title">Orders</span>
+              <i style="font-size: 18px; color: gray; margin-left: 7.8rem;" class="ri-shopping-bag-2-fill"></i>
             </a>
             <div class="collapse" id="icons">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/icons/font-awesome.html">Font Awesome</a>
+                  <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/orderpage">ORDER TABLE</a>
                 </li>
               </ul>
             </div>
@@ -310,60 +311,60 @@
             </div>
           </div>
           <div class="row">
-    <div class="col-12 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Recent Tickets</h4>
-                <div class="button-group">
+            <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recent Tickets</h4>
+                  <div class="button-group">
                     <button id="showUsersTable" class="btn btn-primary">Users Table</button>
                     <button id="showStoreOwnersTable" class="btn btn-primary">Store Owners Table</button>
-                </div>
-                <div class="table-responsive">
+                  </div>
+                  <div class="table-responsive">
                     <!-- Users Table -->
                     <table id="usersTable" class="table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($data['data'] as $user) : ?>
-                                <tr>
-                                    <td><?php echo $user->id; ?></td>
-                                    <td><?php echo $user->name; ?></td>
-                                    <td><?php echo $user->email; ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($data['data'] as $user) : ?>
+                          <tr>
+                            <td><?php echo $user->id; ?></td>
+                            <td><?php echo $user->name; ?></td>
+                            <td><?php echo $user->email; ?></td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
                     </table>
                     <!-- Store Owners Table -->
                     <table id="storeOwnersTable" class="table hidden">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>StoreName</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($data[0] as $storeOwner) : ?>
-                                <tr>
-                                    <td><?php echo $storeOwner->id; ?></td>
-                                    <td><?php echo $storeOwner->store_name; ?></td>
-                                    <td><?php echo $storeOwner->user_name; ?></td>
-                                    <td><?php echo $storeOwner->email; ?></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>StoreName</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($data[0] as $storeOwner) : ?>
+                          <tr>
+                            <td><?php echo $storeOwner->id; ?></td>
+                            <td><?php echo $storeOwner->store_name; ?></td>
+                            <td><?php echo $storeOwner->user_name; ?></td>
+                            <td><?php echo $storeOwner->email; ?></td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
                     </table>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
           <div class="row">
             <div class="col-lg-5 grid-margin stretch-card">
               <div class="card">
@@ -586,31 +587,36 @@
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-<script>
+  <script>
     $(document).ready(function() {
+      // $('#storeOwnersTable').DataTable();
+      // Show users table by default
+      $('#showUsersTable').addClass('active');
+      $('#usersTable').removeClass('hidden');
       $('#usersTable').DataTable();
-      $('#storeOwnersTable').DataTable();
-        // Show users table by default
+
+
+      // Click event for Users Table button
+      $('#showUsersTable').click(function() {
         $('#showUsersTable').addClass('active');
+        $('#showStoreOwnersTable').removeClass('active');
         $('#usersTable').removeClass('hidden');
-        
-        // Click event for Users Table button
-        $('#showUsersTable').click(function() {
-            $('#showUsersTable').addClass('active');
-            $('#showStoreOwnersTable').removeClass('active');
-            $('#usersTable').removeClass('hidden');
-            $('#storeOwnersTable').addClass('hidden');
-        });
-        
-        // Click event for Store Owners Table button
-        $('#showStoreOwnersTable').click(function() {
-            $('#showStoreOwnersTable').addClass('active');
-            $('#showUsersTable').removeClass('active');
-            $('#usersTable').addClass('hidden');
-            $('#storeOwnersTable').removeClass('hidden');
-        });
+        $('#storeOwnersTable').addClass('hidden');
+        $('#usersTable').DataTable();
+        $('#storeOwnersTable').DataTable().destroy();
+      });
+
+      // Click event for Store Owners Table button
+      $('#showStoreOwnersTable').click(function() {
+        $('#showStoreOwnersTable').addClass('active');
+        $('#showUsersTable').removeClass('active');
+        $('#usersTable').addClass('hidden');
+        $('#storeOwnersTable').removeClass('hidden');
+        $('#usersTable').DataTable().destroy();
+        $('#storeOwnersTable').DataTable();
+      });
     });
-</script>
+  </script>
 </body>
 
 </html>
