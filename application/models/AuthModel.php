@@ -1,6 +1,4 @@
 <?php
-
-
 class AuthModel extends Database
 {
     public function register($data)
