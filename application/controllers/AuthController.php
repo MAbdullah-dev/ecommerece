@@ -119,12 +119,27 @@ class AuthController extends framwork {
             $this->setSession('usgit initer_id', $user->id);
             $this->setSession('user_name', $user->name);
             $this->setSession('user_role', $user->role_id);
+
+            if ($user->role_id == 2) { // If the user is a seller
+                $store = $this->AuthModel->getStoreByUserId($user->id);
+                if ($store) {
+                    $this->setSession('store_id', $store->id);
+                }
+            }
         } else {
             // Return error response
             echo json_encode(['status' => 401, 'message' => 'Invalid email or password']);
 
             $errors['login'] = 'Invalid email or password';
         }
+    }
+    public function logout()
+    {
+        session_start();
+        $_SESSION=array();
+        $this->destroySessions();
+        $this->redirect('/AuthController/loginpage');
+
     }
 }
 ?>

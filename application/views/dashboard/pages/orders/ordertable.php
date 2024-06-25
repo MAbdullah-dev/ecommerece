@@ -52,122 +52,24 @@
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
               <div class="nav-profile-img">
-                <img src="../dashboardAssets/assets/images/faces/face1.jpg" alt="image">
+                <!-- <img src="../dashboardAssets/assets/images/faces/face1.jpg" alt="image"> -->
                 <span class="availability-status online"></span>
               </div>
               <div class="nav-profile-text">
-                <p class="mb-1 text-black">David Greymaax</p>
+                <p class="mb-1 text-black"><?php echo $_SESSION['user_name'] ?></p>
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="#">
-                <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+              <!-- <a class="dropdown-item" href="#">
+                <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a> -->
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
+              <a class="dropdown-item" href="<?php echo BASEURL ?>AuthController/logout">
                 <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
             </div>
           </li>
           <li class="nav-item d-none d-lg-block full-screen-link">
             <a class="nav-link">
               <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="mdi mdi-email-outline"></i>
-              <span class="count-symbol bg-warning"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-              <h6 class="p-3 mb-0">Messages</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../dashboardAssets/assets/images/faces/face4.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
-                  <p class="text-gray mb-0"> 1 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../dashboardAssets/assets/images/faces/face2.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
-                  <p class="text-gray mb-0"> 15 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <img src="../dashboardAssets/assets/images/faces/face3.jpg" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
-                  <p class="text-gray mb-0"> 18 Minutes ago </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">4 new messages</h6>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
-              <i class="mdi mdi-bell-outline"></i>
-              <span class="count-symbol bg-danger"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
-              <h6 class="p-3 mb-0">Notifications</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                  <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-cog"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                  <p class="text-gray ellipsis mb-0"> Update dashboard </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                  <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                  <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-            </div>
-          </li>
-          <li class="nav-item nav-logout d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-power"></i>
-            </a>
-          </li>
-          <li class="nav-item nav-settings d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <i class="mdi mdi-format-line-spacing"></i>
             </a>
           </li>
         </ul>
@@ -184,13 +86,12 @@
           <li class="nav-item nav-profile">
             <a href="#" class="nav-link">
               <div class="nav-profile-image">
-                <img src="../dashboardAssets/assets/images/faces/face1.jpg" alt="profile" />
                 <span class="login-status online"></span>
                 <!--change to offline or busy as needed-->
               </div>
               <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">David Grey. H</span>
-                <span class="text-secondary text-small">Project Manager</span>
+                <span class="font-weight-bold mb-2"><?php echo $_SESSION['user_name'] ?></span>
+                <span class="text-secondary text-small">store_Owner</span>
               </div>
               <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
             </a>
@@ -343,23 +244,45 @@
                 <div class="card-body">
                   <h4 class="card-title">Inser your New Product</h4>
                   <div class="container mt-5">
+                    <h1>Orders</h1>
+                    <?php if (!empty($data['data'])) : ?>
+                      <div class="table-responsive">
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>ID</th>
+                              <th>User Name</th>
+                              <th>Grand Total</th>
+                              <th>Status</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <?php foreach ($data['data'] as $order) : ?>
+                              <tr>
+                                <td><?php echo htmlspecialchars($order->id); ?></td>
+                                <td><?php echo htmlspecialchars($order->user_name); ?></td>
+                                <td><?php echo htmlspecialchars($order->grand_total); ?></td>
+                                <td><?php echo htmlspecialchars($order->status); ?></td>
+                                <td>
+                                  <a href="<?php echo BASEURL ?>OrderController/approveOrder/<?php echo $order->id; ?>" class="btn btn-success btn-sm">Approve</a>
+                                  <a href="<?php echo BASEURL ?>OrderController/viewOrderItems/<?php echo $order->id; ?>" class="btn btn-info btn-sm">View Order Items</a>
+                                </td>
+                              </tr>
+                            <?php endforeach; ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    <?php else : ?>
+                      <div class="alert alert-warning" role="alert">
+                        No orders found.
+                      </div>
+                    <?php endif; ?>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
-          <!-- <footer class="footer">
-      <div class="d-sm-flex justify-content-center justify-content-sm-between">
-        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights reserved.</span>
-        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
-      </div>
-    </footer> -->
           <!-- partial -->
         </div>
         <!-- main-panel ends -->

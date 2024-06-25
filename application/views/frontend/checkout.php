@@ -1,5 +1,5 @@
 <?php require_once "partials/header.php" ?>
-<?php print_r($data) ?>
+
 <main>
     <!-- breadcrumb Start-->
     <div class="page-notification page-notification2">
@@ -23,7 +23,7 @@
         <?php foreach ($data['data'] as $product) : ?>
             <div class="checkout-item d-flex justify-content-between align-items-center pb-2 mb-2" style="border-bottom: 1px solid #e9ecef;">
                 <div class="item-details d-flex align-items-center">
-                    <img src="<?php echo BASEURL . 'assets/img/products/' . $product->image; ?>" alt="<?php echo $product->product_name; ?>" style="width: 50px; height: 50px; margin-right: 15px;">
+                    <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="<?php echo $product->product_name; ?>" style="width: 50px; height: 50px; margin-right: 15px;">
                     <span class="item-name" style="font-weight: bold;"><?php echo $product->product_name; ?></span>
                 </div>
                 <span class="item-quantity" style="font-size: 2rem; margin-left: 20px;">
@@ -36,7 +36,7 @@
         <?php endforeach; ?>
         <div class="d-flex justify-content-between align-items-center mt-4">
             <span class="total-price" style="font-weight: bold; font-size: 1.5rem;">Grand Total: $<?php echo $grandTotal; ?></span>
-            <button id="checkout-btn" class="btn btn-primary" style="padding: 10px 20px;">Checkout</button>
+            <button id="checkout-btn" class="btn btn-primary" style="padding: 30px 20px;">Checkout</button>
         </div>
     </div>
 </div>

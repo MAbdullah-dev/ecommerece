@@ -1,8 +1,4 @@
 <?php require_once "partials/header.php" ?>
-<?php print_r($data) ?>
-
-    
-    
 <main>
     <!-- breadcrumb Start-->
     <div class="page-notification">
@@ -49,10 +45,15 @@
                                     <input type="hidden" name="product_id" value="<?php echo $product->id; ?>">
                                     <input type="hidden" name="store_id" value="<?php echo $product->store_id; ?>">
                                     <div class="form-group">
+                                        <?php if ($_SESSION['user_role'] == 3) : ?>
                                         <label for="quantity">Quantity:</label>
                                         <input type="number" name="quantity" id="quantity" class="form-control" required>
+                                        <?php endif ?>
                                     </div>
+                                    <?php if ($_SESSION['user_role'] == 3) : ?>
                                     <button type="submit" class="btn btn-primary mt-2">Add to Cart</button>
+                                    <?php endif ?>
+
                                 </form>
                                 <?php endforeach ?>
                             </div>

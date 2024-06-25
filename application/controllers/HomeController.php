@@ -20,7 +20,14 @@ class HomeController extends framwork
     }
     public function home()
     {
-        $this->view('frontend/home');
+        $data = $this->ProductModel->getAllProducts();
+        $this->view('frontend/home', ['data' => $data]);
+    }
+    public function header()
+    {
+        $user_id = $_SESSION['usgit initer_id']; // Assume user is logged in
+        $cartItems = $this->CartModel->getCartItemsByUserId($user_id);
+        $this->view('frontend/home',['data'=>$cartItems ]);
     }
     public function about()
     {
@@ -36,7 +43,7 @@ class HomeController extends framwork
     }
     public function shop()
     {
-        $data = $this->ProductModel->showData();
+        $data = $this->ProductModel->getAllProducts();
         $this->view('frontend/shop', ['data' => $data]);
     }
     public function product_detail($id)
@@ -47,7 +54,7 @@ class HomeController extends framwork
     }
     public function checkout()
     {
-        session_start();
+       
         $user_id = $_SESSION['usgit initer_id']; // Assume user is logged in
         $cartItems = $this->CartModel->getCartItemsByUserId($user_id);
         $this->view('frontend/checkout',['data'=>$cartItems ]);

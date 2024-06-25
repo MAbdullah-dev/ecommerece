@@ -41,6 +41,12 @@ class AuthModel extends Database
         $this->Query($sql, [':email' => $email]);
         return $this->fetch();
     }
+    public function getStoreByUserId($user_id)
+    {
+        $sql = "SELECT * FROM stores WHERE user_id = :user_id";
+        $this->Query($sql, [':user_id' => $user_id]);
+        return $this->fetch();
+    }
 }
 
 ?>
