@@ -60,13 +60,13 @@
                                         <li><a href="<?php echo BASEURL ?>">Home</a></li>
                                         <li><a href="<?php echo BASEURL ?>HomeController/shop">Shop</a></li>
                                         <li><a href="<?php echo BASEURL ?>HomeController/about">About</a></li>
-                                        <li><a href="<?php echo BASEURL ?>HomeController/blog">Blog</a>
-                                            <ul class="submenu">
+                                        <!-- <li><a href="<?php echo BASEURL ?>HomeController/blog">Blog</a> -->
+                                            <!-- <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
                                                 <li><a href="blog_details.html">Blog Details</a></li>
                                                 <li><a href="elements.html">Elements</a></li>
                                                 <li><a href="product_details.html">Product Details</a></li>
-                                            </ul>
+                                            </ul> -->
                                         </li>
                                         <li><a href="<?php echo BASEURL ?>HomeController/contact">Contact</a></li>
                                         <?php if ($_SESSION['user_role'] == 1) : ?>
