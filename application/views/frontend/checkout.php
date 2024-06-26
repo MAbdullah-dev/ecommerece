@@ -204,73 +204,92 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-    $(document).ready(function() {
-        // Update quantity
-        $('.quantity').on('change', function() {
-            var productId = $(this).data('id');
-            var quantity = $(this).val();
-            updateQuantity(productId, quantity);
-        });
+$(document).ready(function() {
+    // Update quantity
+    $('.quantity').on('change', function() {
+        var productId = $(this).data('id');
+        var quantity = $(this).val();
+        updateQuantity(productId, quantity);
+    });
 
-        // Remove item
-        $('.remove-btn').on('click', function() {
-            var productId = $(this).data('id');
-            removeItem(productId);
-        });
+    // Remove item
+    $('.remove-btn').on('click', function() {
+        var productId = $(this).data('id');
+        removeItem(productId);
+    });
 
-        // Checkout
-        $('#checkout-btn').on('click', function() {
-            checkout();
-        });
+    // Checkout
+    $('#checkout-btn').on('click', function() {
+        checkout();
+    });
 
-        function updateQuantity(productId, quantity) {
-            $.ajax({
-                url: "<?php echo BASEURL ?>/CartController/updateQuantity",
-                method: 'POST',
-                data: {
-                    product_id: productId,
-                    quantity: quantity
-                },
-                success: function(response) {
-                    const data = JSON.parse(response);
-                    alert(data.message);
-                    if (data.status === 200) {
-                        location.reload();
-                    }
+    function updateQuantity(productId, quantity) {
+        $.ajax({
+            url: "<?php echo BASEURL ?>/CartController/updateQuantity",
+            method: 'POST',
+            data: {
+                product_id: productId,
+                quantity: quantity
+            },
+            success: function(response) {
+                const data = JSON.parse(response);
+                alert(data.message);
+                if (data.status === 200) {
+                    location.reload();
                 }
-            });
-        }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error in Update Quantity AJAX:", error);
+                alert("Failed to update quantity.");
+            }
+        });
+    }
 
-        function removeItem(productId) {
-            $.ajax({
-                url: "<?php echo BASEURL ?>/CartController/removeItem",
-                method: 'POST',
-                data: {
-                    product_id: productId
-                },
-                success: function(response) {
-                    const data = JSON.parse(response);
-                    alert(data.message);
-                    if (data.status === 200) {
-                        location.reload();
-                    }
+    function removeItem(productId) {
+        $.ajax({
+            url: "<?php echo BASEURL ?>/CartController/removeItem",
+            method: 'POST',
+            data: {
+                product_id: productId
+            },
+            success: function(response) {
+                const data = JSON.parse(response);
+                alert(data.message);
+                if (data.status === 200) {
+                    location.reload();
                 }
-            });
-        }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error in Remove Item AJAX:", error);
+                alert("Failed to remove item.");
+            }
+        });
+    }
 
-        function checkout() {
-            $.ajax({
-                url: "<?php echo BASEURL ?>/CartController/checkout",
-                method: 'POST',
-                success: function(response) {
+    function checkout() {
+        $.ajax({
+            url: "<?php echo BASEURL ?>/CartController/checkout",
+            method: 'POST',
+            success: function(response) {
+                console.log("Checkout Response:", response);
+                try {
                     const data = JSON.parse(response);
                     alert(data.message);
                     if (data.status === 200) {
                         window.location.href = "<?php echo BASEURL ?>";
                     }
+                } catch (e) {
+                    console.error("Error parsing JSON:", e);
+                    alert("An error occurred during checkout.");
                 }
-            });
-        }
-    });
+            },
+            error: function(xhr, status, error) {
+                console.error("Error in Checkout AJAX:", error);
+                alert("Failed to complete checkout.");
+            }
+        });
+    }
+});
+
 </script>
     <?php require_once "partials/footer.php" ?>

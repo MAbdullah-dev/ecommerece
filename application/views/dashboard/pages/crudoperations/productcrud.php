@@ -374,81 +374,87 @@ $conn->close();
         });
 
         function showData() {
-          $.ajax({
-            'url': "<?php echo BASEURL ?>/ProductController/showData",
-            'method': "GET",
-            'contentType': 'application/json'
-          }).done(function(data) {
-            data = $.parseJSON(data);
-            $('#productTable').DataTable({
-              "data": data,
-              "columns": [{
-                  "data": "id"
-                },
-                {
-                  "data": "name"
-                },
-                {
-                  "data": "description"
-                },
-                {
-                  "data": "image"
-                },
-                {
-                  "data": "price"
-                },
-                {
-                  "data": "stock"
-                },
-                {
-                  data: null,
-                  className: 'dt-center editor-edit',
-                  defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
-                  orderable: false
-                },
-                {
-                  data: null,
-                  className: 'dt-center editor-edit',
-                  defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
-                  orderable: false
-                },
-              ]
-            })
-          })
+          // $.ajax({
+          //   'url': "<?php echo BASEURL ?>/ProductController/showData",
+          //   'method': "GET",
+          //   'contentType': 'application/json'
+          // }).done(function(data) {
+          //   data = $.parseJSON(data);
+          //   $('#productTable').DataTable({
+          //     "data": data,
+          //     "columns": [{
+          //         "data": "id"
+          //       },
+          //       {
+          //         "data": "name"
+          //       },
+          //       {
+          //         "data": "description"
+          //       },
+          //       {
+          //         "data": "image"
+          //       },
+          //       {
+          //         "data": "price"
+          //       },
+          //       {
+          //         "data": "stock"
+          //       },
+          //       {
+          //         data: null,
+          //         className: 'dt-center editor-edit',
+          //         defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
+          //         orderable: false
+          //       },
+          //       {
+          //         data: null,
+          //         className: 'dt-center editor-edit',
+          //         defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
+          //         orderable: false
+          //       },
+          //     ]
+          //   })
+          // })
         }
+      
+          // $(document).ready(function() {
+  $('#productTable').DataTable({
+    "ajax": {
+      'url': "<?php echo BASEURL ?>/ProductController/showData",
+      'method': "GET",
+      'contentType': 'application/json',
+      'dataSrc': function(data) {
+        // Log the raw response to the console for debugging
+        console.log('Raw Data response:', data);
 
-//         $(document).ready(function() {
-//   $('#productTable').DataTable({
-//     "ajax": {
-//       'url': "<?php echo BASEURL ?>/ProductController/showData",
-//       'method': "GET",
-//       'contentType': 'application/json',
-//       'dataSrc': function(json) {
-//         return $.parseJSON(json);
-//       }
-//     },
-//     "columns": [
-//       { "data": "id" },
-//       { "data": "name" },
-//       { "data": "description" },
-//       { "data": "image" },
-//       { "data": "price" },
-//       { "data": "stock" },
-//       {
-//         data: null,
-//         className: 'dt-center editor-edit',
-//         defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
-//         orderable: false
-//       },
-//       {
-//         data: null,
-//         className: 'dt-center editor-edit',
-//         defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
-//         orderable: false
-//       }
-//     ]
-//   });
+        // Assuming the data is already an object, return it directly
+        return data;
+      }
+    },
+    "columns": [
+      { "data": "id" },
+      { "data": "name" },
+      { "data": "description" },
+      { "data": "image" },
+      { "data": "price" },
+      { "data": "stock" },
+      {
+        data: null,
+        className: 'dt-center editor-edit',
+        defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
+        orderable: false
+      },
+      {
+        data: null,
+        className: 'dt-center editor-edit',
+        defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
+        orderable: false
+      }
+    ]
+  });
 // });
+
+
 
 
 

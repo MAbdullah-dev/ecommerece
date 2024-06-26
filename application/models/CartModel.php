@@ -1,5 +1,4 @@
 <?php
-
 class CartModel extends Database
 {
     public function addToCart($user_id, $product_id, $quantity)
@@ -74,14 +73,14 @@ class CartModel extends Database
         return $this->conn->lastInsertId();
     }
 
-    public function addOrderItem($order_id, $product_id, $quantity, $total_price)
+    public function addOrderItem($order_id, $product_id, $quantity, $totalprice)
     {
         $sql = "INSERT INTO order_items (order_id, product_id, quantity, totalprice) VALUES (:order_id, :product_id, :quantity, :totalprice)";
         $params = [
             ':order_id' => $order_id,
             ':product_id' => $product_id,
             ':quantity' => $quantity,
-            ':totalprice' => $total_price
+            ':totalprice' => $totalprice
         ];
         return $this->Query($sql, $params);
     }

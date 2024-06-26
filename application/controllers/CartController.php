@@ -1,5 +1,4 @@
 <?php
-
 class CartController extends framwork
 {
     private $cartModel;
@@ -25,31 +24,37 @@ class CartController extends framwork
         echo json_encode(['message' => 'Product added to cart successfully!']);
     }
 
-    public function checkout()
-    {
+    public function checkout() {
         session_start();
-        $user_id = $_SESSION['usgit initer_id']; // Assume user is logged in
+        $user_id = $_SESSION['usgit initer_id']; // Correct the session key
         $cartItems = $this->cartModel->getCartItemsByUserId($user_id);
-
-        $grandTotal = 0;
-        $store_id = null;
-        foreach ($cartItems as $item) {
-            $grandTotal += $item->total_price;
-            $store_id = $item->store_id; 
+    
+        if (empty($cartItems)) {
+            echo json_encode(['status' => 400, 'message' => 'No items in cart']);
+            return;
         }
-
-        // Create order
-        $order_id = $this->cartModel->createOrder($user_id, $store_id, $grandTotal);
-
-        // Add items to order_items table
+    
+        $orders = [];
         foreach ($cartItems as $item) {
-            $this->cartModel->addOrderItem($order_id, $item->product_id, $item->quantity, $item->total_price);
+            $orders[$item->store_id][] = $item;
         }
-
-        // Clear the cart
+    
+        foreach ($orders as $store_id => $items) {
+            $grandTotal = 0;
+            foreach ($items as $item) {
+                $grandTotal += $item->total_price;
+            }
+    
+            $order_id = $this->cartModel->createOrder($user_id, $store_id, $grandTotal);
+    
+            foreach ($items as $item) {
+                $this->cartModel->addOrderItem($order_id, $item->product_id, $item->quantity, $item->total_price);
+            }
+        }
+    
         $this->cartModel->clearCart($user_id);
-
-        echo json_encode(['status' => 200, 'message' => 'Order placed successfully!', 'order_id' => $order_id]);
+    
+        echo json_encode(['status' => 200, 'message' => 'Order placed successfully!']);
     }
 
     public function updateQuantity()
@@ -78,3 +83,4 @@ class CartController extends framwork
         echo json_encode(['status' => 200, 'message' => 'Item removed successfully']);
     }
 }
+?>
