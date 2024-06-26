@@ -35,7 +35,7 @@ class CartController extends framwork
         $store_id = null;
         foreach ($cartItems as $item) {
             $grandTotal += $item->total_price;
-            $store_id = $item->store_id; // Assuming all items are from the same store
+            $store_id = $item->store_id; 
         }
 
         // Create order

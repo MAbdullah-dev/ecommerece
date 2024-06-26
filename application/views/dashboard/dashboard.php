@@ -121,8 +121,6 @@
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-
-
                   <?php if ($_SESSION['user_role'] == 2) : ?>
                     <li class="nav-item">
                       <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
@@ -164,9 +162,6 @@
                 </div>
               </li>
             <?php endif ?>
-
-          
-           
         </ul>
       </nav>
       <!-- partial -->

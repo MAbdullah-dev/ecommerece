@@ -92,7 +92,7 @@ $conn->close();
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
               <!-- <a class="dropdown-item" href="#"> -->
-                <!-- <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a> -->
+              <!-- <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a> -->
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="<?php echo BASEURL ?>AuthController/logout">
                 <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
@@ -128,65 +128,62 @@ $conn->close();
             </a>
           </li>
           <li class="nav-item">
+            <?php if ($_SESSION['user_role'] == 1) : ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo BASEURL ?>/DashboardController/dashboardpage">
               <span class="menu-title">Dashboard</span>
               <i class="mdi mdi-home menu-icon"></i>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <span class="menu-title">CRUD OPERATIONS</span>
-              <i class="menu-arrow"></i>
-              <i style="font-size: 18px;color: gray;" class="ri-table-line"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
+        <?php endif ?>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <span class="menu-title">CRUD OPERATIONS</span>
+            <i class="menu-arrow"></i>
+            <i style="font-size: 18px;color: gray;" class="ri-table-line"></i>
+          </a>
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
 
-                <?php if (isset($_SESSION['user_role'])) : ?>
+              <?php if (isset($_SESSION['user_role'])) : ?>
 
-                  <?php if ($_SESSION['user_role'] == 1) : ?>
-                    <li class="nav-item">
-                      <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
-                    </li>
-                  <?php elseif ($_SESSION['user_role'] == 2) : ?>
-                    <li class="nav-item">
-                      <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
-                    </li>
-                  <?php else : ?>
-                    <li class="nav-item">
-                      <span class="nav-link">Unauthorized user</span>
-                    </li>
-                  <?php endif; ?>
+                <?php if ($_SESSION['user_role'] == 1) : ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/categoriescrudPage">Category CRUD</a>
+                  </li>
+                <?php elseif ($_SESSION['user_role'] == 2) : ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/productcrudPage">Product CRUD</a>
+                  </li>
                 <?php else : ?>
                   <li class="nav-item">
                     <span class="nav-link">Unauthorized user</span>
                   </li>
                 <?php endif; ?>
-
+              <?php else : ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                  <span class="nav-link">Unauthorized user</span>
                 </li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-              <span class="menu-title">Orders</span>
-              <i style="font-size: 18px; color: gray; margin-left: 7.8rem;" class="ri-shopping-bag-2-fill"></i>
-            </a>
-            <div class="collapse" id="icons">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item">
-                  <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/orderpage">ORDER TABLE</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-
+              <?php endif; ?>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+            <span class="menu-title">Orders</span>
+            <i style="font-size: 18px; color: gray; margin-left: 7.8rem;" class="ri-shopping-bag-2-fill"></i>
+          </a>
+          <div class="collapse" id="icons">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item">
+                <a class="nav-link" href="<?php echo BASEURL ?>DashboardController/orderpage">ORDER TABLE</a>
+              </li>
+            </ul>
+          </div>
+        </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -267,7 +264,7 @@ $conn->close();
                           <th scope="col">Update</th>
                         </tr>
                       </thead>
-                      <tbody id="productList"></tbody>
+                      <!-- <tbody id="productList"></tbody> -->
                     </table>
                   </div>
                 </div>
@@ -338,7 +335,7 @@ $conn->close();
       // $('#softProductTable').DataTable();
       $(document).ready(function() {
         // Initialize DataTables
-        let productTable = $('#productTable').DataTable();
+        // let productTable = $('#productTable').DataTable();
         let softProductTable = $('#softProductTable').DataTable();
 
         // Form submission for uploading a product
@@ -376,40 +373,130 @@ $conn->close();
           });
         });
 
-        // Function to fetch and display all products
         function showData() {
           $.ajax({
-            url: "<?php echo BASEURL ?>/ProductController/showData",
-            method: 'get',
-            success: function(res) {
-              let products = $.parseJSON(res);
-              let output = '';
-              if (Array.isArray(products)) {
-                products.forEach(function(product) {
-                  output +=
-                    `<tr>
-                  <th scope="row">${product.id}</th>
-                  <td>${product.name}</td>
-                  <td>${product.description}</td>
-                  <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
-                  <td>${product.price}</td>
-                  <td>${product.stock}</td>
-                  <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="${product.id}">Update</button></td>
-                  <td><button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button></td>
-                </tr>`;
-                });
-              } else {
-                output = '<tr><td colspan="8">No products found</td></tr>';
-              }
-              productTable.clear().destroy(); // Clear and destroy existing table
-              document.getElementById('productList').innerHTML = output;
-              productTable = $('#productTable').DataTable(); // Reinitialize DataTables
-            },
-            error: function(xhr, status, error) {
-              console.log(xhr.responseText);
-            }
-          });
+            'url': "<?php echo BASEURL ?>/ProductController/showData",
+            'method': "GET",
+            'contentType': 'application/json'
+          }).done(function(data) {
+            data = $.parseJSON(data);
+            $('#productTable').DataTable({
+              "data": data,
+              "columns": [{
+                  "data": "id"
+                },
+                {
+                  "data": "name"
+                },
+                {
+                  "data": "description"
+                },
+                {
+                  "data": "image"
+                },
+                {
+                  "data": "price"
+                },
+                {
+                  "data": "stock"
+                },
+                {
+                  data: null,
+                  className: 'dt-center editor-edit',
+                  defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
+                  orderable: false
+                },
+                {
+                  data: null,
+                  className: 'dt-center editor-edit',
+                  defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
+                  orderable: false
+                },
+              ]
+            })
+          })
         }
+
+//         $(document).ready(function() {
+//   $('#productTable').DataTable({
+//     "ajax": {
+//       'url': "<?php echo BASEURL ?>/ProductController/showData",
+//       'method': "GET",
+//       'contentType': 'application/json',
+//       'dataSrc': function(json) {
+//         return $.parseJSON(json);
+//       }
+//     },
+//     "columns": [
+//       { "data": "id" },
+//       { "data": "name" },
+//       { "data": "description" },
+//       { "data": "image" },
+//       { "data": "price" },
+//       { "data": "stock" },
+//       {
+//         data: null,
+//         className: 'dt-center editor-edit',
+//         defaultContent: '<button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="{"data": "id"}">Update</button>',
+//         orderable: false
+//       },
+//       {
+//         data: null,
+//         className: 'dt-center editor-edit',
+//         defaultContent: '<button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button>',
+//         orderable: false
+//       }
+//     ]
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Function to fetch and display all products
+        // function showData() {
+        //   $.ajax({
+        //     url: "<?php echo BASEURL ?>/ProductController/showData",
+        //     method: 'get',
+        //     success: function(res) {
+        //       let products = $.parseJSON(res);
+        //       let output = '';
+        //       if (Array.isArray(products)) {
+        //         products.forEach(function(product) {
+        //           output +=
+        //             `<tr>
+        //           <th scope="row">${product.id}</th>
+        //           <td>${product.name}</td>
+        //           <td>${product.description}</td>
+        //           <td><img src="${product.image}" alt="${product.name}" width="50" height="50"></td>
+        //           <td>${product.price}</td>
+        //           <td>${product.stock}</td>
+        //           <td><button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateModal" id="update-btn" data-id="${product.id}">Update</button></td>
+        //           <td><button class="btn btn-danger btn-sm" id="softdelete-btn" data-id="${product.id}">Temporary Delete</button></td>
+        //         </tr>`;
+        //         });
+        //       } else {
+        //         output = '<tr><td colspan="8">No products found</td></tr>';
+        //       }
+        //       productTable.clear().destroy(); // Clear and destroy existing table
+        //       document.getElementById('productList').innerHTML = output;
+        //       productTable = $('#productTable').DataTable(); // Reinitialize DataTables
+        //     },
+        //     error: function(xhr, status, error) {
+        //       console.log(xhr.responseText);
+        //     }
+        //   });
+        // }
 
         // Function to fetch and display soft-deleted products
         function showSoftData() {
